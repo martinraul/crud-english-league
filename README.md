@@ -8,17 +8,16 @@ A CRUD (Create, Read, Update and Delete) application
 
 ## Install
 Download and unzip code dir.
-Open terminal.
-Run `npm install` to install.
-Run `npm run dev` to run server.
-Point your browser to: `http://localhost:3000/`
-
-## Working link⬇
-
+Open terminal.  
+Run `npm install` to install.  
+Run `npm run dev` to run server.  
+Point your browser to: `http://localhost:3000/`  
 
 ## To do list
+- Add a map to see each team venue location
 - Add unit tests
 - Add style with css framework
+- Deploy to Heroku
 
 ## Acknowledgments
 * Hat tip to everyone at [r/argentinaPrograma](https://argentinaprograma.com/)
