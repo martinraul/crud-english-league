@@ -1,0 +1,24 @@
+<h1>English Football League</h1>
+{{#if deletedTeamMsg}}
+<p class="alert">{{deletedTeamMsg}}</p>
+{{/if}}
+
+<table>
+  <tr>
+    <th>Team Name⬇</th>
+    <th>Actions⬇</th>
+  </tr>
+  {{#each teams as |team|}}
+  <tr>
+    <td>
+      {{team.name}}
+    </td>
+    <td>
+      <a class="button"href="/viewteam/{{team.tla}}">View Info</a>
+      <a class="button"href="/edit/{{team.tla}}">Edit</a>
+      <a class="button"href="/create/">Create</a>
+       <a class="button"href="/delete/{{team.id}}">Delete</a>
+    </td>
+  </tr>
+  {{/each}}
+</table>

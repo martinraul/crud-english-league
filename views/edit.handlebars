@@ -1,0 +1,59 @@
+<div>
+  <a href="/">
+    <button>← Back</button>
+  </a>
+</div>
+
+<h1>EDIT TEAM</h1>
+<div>
+  <form action="/edit/{{team.tla}}" method="POST">
+    <div>
+      <label >Name</label>
+      <input type="text" name="name" value="{{team.name}}" required>
+    </div>
+    <div>
+      <label >ShortName</label>
+      <input type="text" name="shortName" value={{team.shortName}}>
+    </div>
+    <div>
+      <label >TLA</label>
+      <input type="text" name="tla" value={{team.tla}}>
+    </div>
+    <div>
+      <label>Address</label>
+      <input type="text" name="address" value="{{team.address}}">
+    </div>
+    <div>
+      <label>Tel   </label>
+      <input type="text" name="phone" value="{{team.phone}}">
+    </div>
+    <div>
+      <label>ID
+      </label>
+      <input type="text" name="id" value="{{team.id}}">
+    </div>
+    <div>
+      <label>Website</label>
+      <input type="text" name="website" value={{team.website}}>
+    </div>
+    <div>
+      <label>E-Mail</label>
+      <input type="text" name="email" value={{team.email}}>
+    </div>
+    <div>
+      <label>Founded</label>
+      <input type="text" name="founded" value={{team.founded}}>
+    </div>
+    <div>
+      <label>Colors</label>
+      <input type="text" name="clubColors" value="{{team.clubColors}}">
+      <div>
+        <label>Venue</label>
+        <input type="text" name="venue" value="{{team.venue}}">
+      </div> <br>
+     
+      <button type="submit" class="submit" >Edit Team</button>
+
+  </form>
+</div>
+<br>

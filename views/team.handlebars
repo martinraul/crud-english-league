@@ -1,0 +1,50 @@
+<div>
+  <a href="/">
+    <button>← Back</button>
+  </a>
+</div>
+
+{{#if mensaje}}
+<p>{{mensaje}}</p>
+{{/if}}
+
+<h1>{{team.name}}</h1>
+<img src={{team.crestUrl}} alt="" width="150" height="200">
+<table>
+  <tr>
+    <td>ShortName</td> 
+    <td><strong>{{team.shortName}}</strong></td>
+  </tr>
+  <tr>
+    <td>TLA</td>
+    <td>{{team.tla}}</td>
+  </tr>
+  <tr>
+    <td>Address</td>
+    <td><strong>{{team.address}}</strong></td>
+  </tr>
+  <tr>
+    <td>Tel</td>
+    <td><strong>{{team.phone}}</strong></td>
+  </tr>
+  <tr>
+    <td>Website</td>
+    <td><strong>{{team.website}}</strong></td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td><strong>{{team.email}}</strong></td>
+  </tr>
+  <tr>
+    <td>Founded</td>
+    <td><strong>{{team.founded}}</strong></td>
+  </tr>
+  <tr>
+    <td>Colors</td>
+    <td><strong>{{team.clubColors}}</strong></td>
+  </tr>
+  <tr>
+    <td>Venue</td>
+    <td><strong>{{team.venue}}</strong></td>
+  </tr>
+</table>
