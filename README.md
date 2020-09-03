@@ -2,25 +2,25 @@
 A CRUD (Create, Read, Update and Delete) application
 
 ## Built with
-* [NODE.js](https://nodejs.org/)
+* [Node.js](https://nodejs.org/)
 * [Express](https://expressjs.com/)
-* [Express](https://handlebarsjs.com/)
+* [Handlebars](https://handlebarsjs.com/)
 
 ## Working Link
 https://crud-english-league.herokuapp.com/
 
 ## Install
-Download and unzip code dir.
+Download and unzip code dir.  
 Open terminal.  
 Run `npm install` to install.  
 Run `npm run dev` to run server.  
 Point your browser to: `http://localhost:3000/`  
 
-## To do list
-- Add a map to see each team venue location
-- Add unit tests
-- Add style with css framework
-- Deploy to Heroku
+## To-do List
+- [x] Deploy app to Heroku
+- [ ] Add a map to see each team venue location
+- [ ] Add unit tests
+- [ ] Add style with css framework
 
 ## Acknowledgments
 * Hat tip to everyone at [r/argentinaPrograma](https://argentinaprograma.com/)
