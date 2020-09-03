@@ -9,8 +9,7 @@ const upload = multer({ dest: "./uploads/img" });
 
 const app = express();
 const hbs = exphbs.create();
-const port = process.env.PORT || 3000; 
-
+const port = 3000;
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
