@@ -29,10 +29,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/viewteam/:tla", (req, res) => {
-  const jsonSingleTeam = fs.readFileSync(
-    `./data/teams/${req.param("tla")}.json`,
-    "utf-8"
-  );
+  const jsonSingleTeam = fs.readFileSync(`./data/teams/${req.param("tla")}.json`, "utf-8");
   const team = JSON.parse(jsonSingleTeam);
   res.render("team", {
     layout: "layout",
@@ -60,10 +57,7 @@ app.get("/delete/:id", (req, res, next) => {
 });
 
 app.get("/edit/:tla", (req, res) => {
-  const jsonTeams = fs.readFileSync(
-    `./data/teams/${req.param("tla")}.json`,
-    "utf-8"
-  );
+  const jsonTeams = fs.readFileSync(`./data/teams/${req.param("tla")}.json`,"utf-8");
   const team = JSON.parse(jsonTeams);
   res.render("edit", {
     layout: "layout",
@@ -72,10 +66,7 @@ app.get("/edit/:tla", (req, res) => {
 });
 
 app.post("/edit/:tla", (req, res) => {
-  const jsonSingleTeam = fs.readFileSync(
-    `./data/teams/${req.param("tla")}.json`,
-    "utf-8"
-  );
+  const jsonSingleTeam = fs.readFileSync(`./data/teams/${req.param("tla")}.json`,"utf-8");
 
   //this update single team card
   const team = JSON.parse(jsonSingleTeam);
@@ -139,7 +130,6 @@ app.post("/create", upload.single("imagen"), (req, res) => {
 
   res.redirect(`/viewteam/${tla}`);
 });
-
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
