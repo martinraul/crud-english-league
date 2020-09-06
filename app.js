@@ -1,3 +1,4 @@
+
 const express = require("express");
 const bodyParser = require("body-parser");
 
@@ -17,11 +18,11 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/uploads`));
-app.use(express.static(`${__dirname}/uploads`));
 
 app.get("/", (req, res) => {
   const jsonTeams = fs.readFileSync("./data/teams.json", "utf-8");
   const teams = JSON.parse(jsonTeams);
+
   res.render("home", {
     layout: "layout",
     teams,
@@ -36,6 +37,7 @@ app.get("/viewteam/:tla", (req, res) => {
     team,
   });
 });
+
 
 app.get("/delete/:id", (req, res, next) => {
   let jsonTeams = fs.readFileSync(`./data/teams.json`, "utf-8");
@@ -100,7 +102,6 @@ app.post("/create", upload.single("imagen"), (req, res) => {
   const jsonTeams = fs.readFileSync(`./data/teams.json`, "utf-8");
   const teams = JSON.parse(jsonTeams);
 
-  // let pic= req.file
   const {
     name,shortName,address,phone,website,email,venue,tla,
     founded,clubColors,} = req.body;
