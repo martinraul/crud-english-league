@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
   const jsonTeams = fs.readFileSync("./data/teams.json", "utf-8");
   const teams = JSON.parse(jsonTeams);
 
+
   res.render("home", {
     layout: "layout",
     teams,
