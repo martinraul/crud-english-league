@@ -115,7 +115,10 @@ app.post("/edit/:id", urlencodedParser, (req, res) => {
       teams.splice(i, 1, team);
     }
   }
- saveTeams(teams)
+  saveTeams(teams)
+ 
+
+  res.redirect(`/viewteam/${req.params.id}`);
 });
 
 app.get("/create", (req, res) => {
