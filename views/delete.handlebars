@@ -1,0 +1,16 @@
+<div>
+    <a href="/">
+        <button>← Back</button>
+    </a>
+</div>
+
+<h1>Delete Team {{team.name}}?</h1>
+<div>
+    <form action="/delete/{{team.id}}" method="POST">
+        <button type="submit" class="submit">Yes</button>
+    </form>
+    <a href="/">
+        <button>No</button>
+    </a>
+</div>
+<br>

@@ -1,4 +1,3 @@
-
 const express = require("express");
 const bodyParser = require("body-parser");
 
@@ -10,19 +9,23 @@ const upload = multer({ dest: "./uploads/img" });
 
 const app = express();
 const hbs = exphbs.create();
-const port = process.env.PORT || 3000; 
+const port = process.env.PORT || 3000;
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 app.use(bodyParser.urlencoded({ extended: false }));
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/uploads`));
 
-app.get("/", (req, res) => {
-  const jsonTeams = fs.readFileSync("./data/teams.json", "utf-8");
-  const teams = JSON.parse(jsonTeams);
+const service = require("./services/storage.js");
+const getTeams = service.getTeams;
+const getSingleTeam = service.getSingleTeam;
 
+app.get("/", (req, res) => {
+  const teams = getTeams();
 
   res.render("home", {
     layout: "layout",
@@ -30,52 +33,70 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/viewteam/:tla", (req, res) => {
-  const jsonSingleTeam = fs.readFileSync(`./data/teams/${req.param("tla")}.json`, "utf-8");
-  const team = JSON.parse(jsonSingleTeam);
+app.get("/viewteam/:id", (req, res) => {
+  const team = getSingleTeam(req.params.id);
+
   res.render("team", {
     layout: "layout",
     team,
   });
 });
 
-
 app.get("/delete/:id", (req, res, next) => {
-  let jsonTeams = fs.readFileSync(`./data/teams.json`, "utf-8");
-  let teams = JSON.parse(jsonTeams);
-  
-  teams.splice(
-    teams.findIndex(function (i) {
-      return i.id == req.params.id;
-    }),1);
-  let updatedTeams = JSON.stringify(teams);
+  const team = getSingleTeam(req.params.id);
 
-  fs.writeFileSync(`./data/teams.json`, updatedTeams, "utf-8");
-  //res.redirect("/");
-  res.render("home", {
+  res.render("delete", {
     layout: "layout",
-    teams,
-    deletedTeamMsg:"Team Deleted",
+    team,
   });
 });
 
-app.get("/edit/:tla", (req, res) => {
-  const jsonTeams = fs.readFileSync(`./data/teams/${req.param("tla")}.json`,"utf-8");
-  const team = JSON.parse(jsonTeams);
+app.post("/delete/:id", (req, res, next) => {
+  const teams = getTeams();
+  const team = getSingleTeam(req.params.id);
+
+  teams.splice(
+    teams.findIndex(function (i) {
+      return i.id == req.params.id;
+    }),
+    1
+  );
+
+  fs.writeFileSync(`./data/teams.json`, JSON.stringify(teams), "utf-8");
+
+  res.render("home", {
+    layout: "layout",
+    teams,
+    deletedTeamMsg: "Team Deleted",
+  });
+});
+
+app.get("/edit/:id", (req, res) => {
+  const team = getSingleTeam(req.params.id);
+  console.log(team.shortName);
+
   res.render("edit", {
     layout: "layout",
     team,
   });
 });
 
-app.post("/edit/:tla", (req, res) => {
-  const jsonSingleTeam = fs.readFileSync(`./data/teams/${req.param("tla")}.json`,"utf-8");
+app.post("/edit/:id", urlencodedParser, (req, res) => {
+  const teams = getTeams();
+  const team = getSingleTeam(req.params.id);
 
-  //this update single team card
-  const team = JSON.parse(jsonSingleTeam);
   const {
-    name, shortName, address, phone, website,
-    email,venue,tla, founded,clubColors,} = req.body;
+    name,
+    shortName,
+    address,
+    phone,
+    website,
+    email,
+    venue,
+    tla,
+    founded,
+    clubColors,
+  } = req.body;
 
   team.name = name;
   team.shortName = shortName;
@@ -88,25 +109,37 @@ app.post("/edit/:tla", (req, res) => {
   team.clubColors = clubColors;
   team.venue = venue;
 
-  console.log(team);
-  let updatedTeam = JSON.stringify(team);
-  fs.writeFileSync(`./data/teams/${req.param("tla")}.json`,updatedTeam,"utf-8");
-  res.redirect(`/viewteam/${req.param("tla")}`);
+  for (let i = 0; i < teams.length; i++) {
+    if (Number(team.id) === Number(teams[i].id)) {
+      teams.splice(i, 1, team);
+    }
+  }
+
+  fs.writeFileSync(`./data/teams.json`, JSON.stringify(teams), "utf-8");
+  res.redirect(`/viewteam/${req.params.id}`);
 });
 
 app.get("/create", (req, res) => {
-  res.render("create", {layout: "layout", });
+  res.render("create", { layout: "layout" });
 });
 
 app.post("/create", upload.single("imagen"), (req, res) => {
   console.log(req.file);
-  const jsonTeams = fs.readFileSync(`./data/teams.json`, "utf-8");
-  const teams = JSON.parse(jsonTeams);
+  const teams = getTeams();
 
   const {
-    name,shortName,address,phone,website,email,venue,tla,
-    founded,clubColors,} = req.body;
-    
+    name,
+    shortName,
+    address,
+    phone,
+    website,
+    email,
+    venue,
+    tla,
+    founded,
+    clubColors,
+  } = req.body;
+
   crestUrl = `/img/${req.file.filename}`;
 
   let newTeam = {

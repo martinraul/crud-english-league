@@ -6,17 +6,17 @@
 
 <h1>EDIT TEAM</h1>
 <div>
-  <form action="/edit/{{team.tla}}" method="POST">
+  <form action="/edit/{{team.id}}" method="POST">
     <div>
-      <label >Name</label>
+      <label>Name</label>
       <input type="text" name="name" value="{{team.name}}" required>
     </div>
     <div>
-      <label >ShortName</label>
-      <input type="text" name="shortName" value={{team.shortName}}>
+      <label>ShortName</label>
+      <input type="text" name="shortName" value="{{team.shortName}}">
     </div>
     <div>
-      <label >TLA</label>
+      <label>TLA</label>
       <input type="text" name="tla" value={{team.tla}}>
     </div>
     <div>
@@ -24,7 +24,7 @@
       <input type="text" name="address" value="{{team.address}}">
     </div>
     <div>
-      <label>Tel   </label>
+      <label>Tel </label>
       <input type="text" name="phone" value="{{team.phone}}">
     </div>
     <div>
@@ -51,8 +51,8 @@
         <label>Venue</label>
         <input type="text" name="venue" value="{{team.venue}}">
       </div> <br>
-     
-      <button type="submit" class="submit" >Edit Team</button>
+
+      <button type="submit" class="submit">Edit Team</button>
 
   </form>
 </div>
