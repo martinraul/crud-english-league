@@ -6,18 +6,23 @@ function getTeams() {
   return teams;
 }
 
-function getSingleTeam(teamId) {
+function getSingleTeam(id) {
   const teams = getTeams()
   let chosenTeam;
   for (let i = 0; i < teams.length; i++) {
-    if (Number(teams[i].id) === Number(teamId)) {
+    if (Number(teams[i].id) === Number(id)) {
       chosenTeam = teams[i];
     }
   }
   return chosenTeam;
 }
 
+function SaveTeams(teams){
+  fs.writeFileSync(`./data/teams.json`, JSON.stringify(teams), "utf-8");
+}
+
 module.exports = {
   getTeams,
   getSingleTeam,
+  saveTeams,
 };
