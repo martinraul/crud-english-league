@@ -17,7 +17,7 @@ function getSingleTeam(id) {
   return chosenTeam;
 }
 
-function SaveTeams(teams){
+function saveTeams(teams){
   fs.writeFileSync(`./data/teams.json`, JSON.stringify(teams), "utf-8");
 }
 
